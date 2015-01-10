@@ -57,6 +57,7 @@ def handle_client(websocket, path):
     if clientinfo.get('type') == 'player':
         if clientinfo['player']['id'] in main.players:
             player = main.players[clientinfo['player']['id']]
+            print(player.name, 'reconnected')
             main.new_event({'player': {'id': player.id, 'connected': True}})
 
         else:
@@ -73,8 +74,10 @@ def handle_client(websocket, path):
     loop.create_task(send_events(websocket))
     while websocket.open:
         message = yield from websocket.recv()
-        main.new_event(fromjson(message))
-        
+        if not message: break
+        else: main.new_event(fromjson(message))
+
+    print(player.name, 'disconnected')        
     main.new_event({'player': {'id': player.id, 'connected': False}})
     
 start_server = websockets.serve(handle_client, '0.0.0.0', 8765)

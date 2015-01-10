@@ -28,6 +28,8 @@ def debug(websocket):
                 events.append({'player': {'id': me.id, 'power': me.power}})
             elif command[0] == 'hit':
                 events.append({'hit': {'shooter': players[command[1]].id, 'target': me.id}})
+            elif command[0] == 'disconnect':
+                yield from websocket.close()
 
         sys.stdout.write('debug> ')
         sys.stdout.flush()
