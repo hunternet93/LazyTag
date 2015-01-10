@@ -1,0 +1,6 @@
+{
+    "id": "example_id",
+    "name": "Example Tagger",
+    "server": "ws://envy15.lan:8765/",
+    "tagger": 0
+}
