@@ -1,13 +1,11 @@
-try:
-    import ujson as json
-except ImportError:
-    import json
+import ujson
 
 def tojson(*args):
+    return ujson.encode(*args)
     return json.dumps(*args, default = lambda o: o.__dict__)
     
 def fromjson(str):
-    return json.loads(str)
+    return ujson.decode(str)
 
 class Tagger:
     name = 'Tagger'
