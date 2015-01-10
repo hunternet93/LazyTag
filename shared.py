@@ -1,5 +1,5 @@
 try:
-    import cjson as json
+    import ujson as json
 except ImportError:
     import json
 
