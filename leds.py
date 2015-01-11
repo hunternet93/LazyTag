@@ -24,7 +24,7 @@ class LED:
                         self.fading = False
                         
                 elif self.value > self.fading[0]:
-                    try: self.value = self.fading[0] / (self.fading[1] / (self.fading[1] - (time.time() - self.fading[2])))
+                    try: self.value = 1 / (self.fading[1] / (self.fading[1] - (time.time() - self.fading[2])))
                     except ZeroDivisionError: self.value = self.fading[0]
                     if self.value <= self.fading[0]:
                         self.value = self.fading[0]
