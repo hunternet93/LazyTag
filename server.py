@@ -19,6 +19,7 @@ class Main:
     def new_event(self, event):
         send_event = True
         
+        print(event)
         if event.get('player'):
             e = event.get('player')
             player = self.players[e['id']]
@@ -40,11 +41,11 @@ def send_events(websocket):
     event_index = len(main.events)
     while websocket.open:
         if len(main.events) > event_index:
-            events = main.events[event_index-1:]
+            events = main.events[event_index:]
             event_index = len(main.events)
             for event in events: yield from websocket.send(tojson(event))
             
-        yield from asyncio.sleep(0.1)
+        yield from asyncio.sleep(0)
 
 @asyncio.coroutine
 def handle_client(websocket, path):
