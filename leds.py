@@ -12,7 +12,7 @@ class LED:
         self.flashing = False
         asyncio.get_event_loop().create_task(self.tick)
 
-    @asyncio.coroutime
+    @asyncio.coroutine
     def tick(self):
         while True:
             if self.fading:
