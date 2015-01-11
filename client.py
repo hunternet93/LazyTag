@@ -3,8 +3,19 @@
 import asyncio
 import websockets
 import socket
-import sys    
+import sys
+import pygame.mixer
+#import leds
 from shared import *
+
+pygame.mixer.init()
+sounds = {
+    'laser': pygame.mixer.Sound('sfx/laser1.wav'),
+    'hit': pygame.mixer.Sound('sfx/hit1.wav'),
+    'was_hit': pygame.mixer.Sound('sfx/was_hit1.wav'),
+    'tagged': pygame.mixer.Sound('sfx/tagged1.wav'),
+    'untagged': pygame.mixer.Sound('sfx/untagged1.wav')
+}
 
 config = fromjson(open(sys.argv[1]).read())
 
@@ -14,9 +25,16 @@ players = {me.id: me}
 game = Game()
 loop = asyncio.get_event_loop()
 
+last_command = ''
 def debug(websocket):
+    global last_command
     if websocket.open:
         command = sys.stdin.readline()
+        if command == '.\n':
+            command = last_command
+        else:
+            last_command = str(command)
+            
         if command and len(command.split()) > 0:
             command = command.split()
             if command[0] == 'status':
@@ -28,6 +46,9 @@ def debug(websocket):
                 events.append({'player': {'id': me.id, 'power': me.power}})
             elif command[0] == 'hit':
                 events.append({'hit': {'shooter': players[command[1]].id, 'target': me.id}})
+            elif command[0] == 'tagged':
+                events.append({'tagged': {'shooter': players[command[1]].id, 'target': me.id}})
+
         
 @asyncio.coroutine
 def send_events(websocket):
@@ -35,14 +56,13 @@ def send_events(websocket):
         while len(events) > 0:
             yield from websocket.send(tojson(events.pop(0)))
             
-        yield from asyncio.sleep(0.1)
+        yield from asyncio.sleep(0)
 
 @asyncio.coroutine
 def main(websocket):
     while websocket.open:
         message = yield from websocket.recv()
         message = fromjson(message)
-#        print('msg from server:', message)
         
         if message.get('game'): game.update(message['game'])
         
@@ -56,7 +76,8 @@ def main(websocket):
         if message.get('hit'):
             if message['hit']['shooter'] == me.id:
                 print('i hit', message['hit']['target'])
-
+                sounds['hit'].play()
+                
 @asyncio.coroutine
 def connect():
     while True:
