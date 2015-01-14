@@ -45,7 +45,7 @@ def send_events(websocket):
             event_index = len(main.events)
             for event in events: yield from websocket.send(tojson(event))
             
-        yield from asyncio.sleep(0)
+        yield from asyncio.sleep(0.025)
 
 @asyncio.coroutine
 def handle_client(websocket, path):
@@ -67,7 +67,7 @@ def handle_client(websocket, path):
             main.new_player(player)
             
     elif clientinfo.get('type') == 'web':
-        log('new web client connected: ', websocket.getpeername())
+        log('new web client connected')
     
     yield from websocket.send(tojson({'game': main.game}))
     for p in main.players.values(): yield from websocket.send(tojson({'player': p}))
@@ -78,7 +78,7 @@ def handle_client(websocket, path):
         if not message: break
         else: main.new_event(fromjson(message))
 
-    print(player.name, 'disconnected')        
+    if player: print(player.name, 'disconnected')        
     main.new_event({'player': {'id': player.id, 'connected': False}})
     
 start_server = websockets.serve(handle_client, '0.0.0.0', 8765)
