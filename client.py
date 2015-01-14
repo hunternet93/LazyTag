@@ -56,7 +56,7 @@ def send_events(websocket):
         while len(events) > 0:
             yield from websocket.send(tojson(events.pop(0)))
             
-        yield from asyncio.sleep(0)
+        yield from asyncio.sleep(0.025)
 
 @asyncio.coroutine
 def main(websocket):
