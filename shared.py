@@ -37,7 +37,7 @@ class Player:
 
 class Game:
     def __init__(self):
-        self.state = 'idle'
+        self.state = 'not playing'
         self.mode = None
         self.teams = 0
         

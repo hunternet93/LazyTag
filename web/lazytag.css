@@ -1,8 +1,24 @@
 body {
-    background-color: #101010;
+    background: url("img/lazytag.svg") no-repeat #101010 0% 0%;
     color: white;
     font-family: "Verdana", sans-serif;
     font-size: 1.2em;
+}
+
+button,select {
+    background-color: #050505;
+    color: white;
+    font-family: "Verdana", sans-serif;
+    font-size: 1em;
+}
+
+#main {
+    opacity: 0;
+}
+
+#main.connected {
+    opacity: 100;
+    transition: 1s;
 }
 
 #game {
@@ -13,14 +29,23 @@ body {
 
 #gamesettings {
     height: 0vh;
-    width: 100%;
     margin: 0 auto;
-    transition: 1s;
     background-color: black;
+    overflow: hidden;
+    transition: height 1s;
 }
 
 #gamesettings.expand {
-    height: 10vh;
+    height: 25vh;
+}
+
+#gamesettings li {
+    list-style: none;
+}
+
+#gamesettings label {
+    width: 50%;
+    display: inline-block;
 }
 
 #players {
@@ -31,6 +56,7 @@ body {
 
 #playerlist {
     width: 100%;
+    overflow: scroll;
 }
 
 #playerlist caption {
@@ -39,6 +65,27 @@ body {
 
 #playerlist tr,th,td{
     text-align: left;
+}
+
+.playersettings {
+    height: 20vh;
+    width: 100%;
+    transition: 1s;
+    background-color: black;
+    overflow: hidden;
+}
+
+.collapsed {
+    height: 0;
+}
+
+.imgbutton {
+    transition: 1s;
+    transform: rotate(-90deg);
+}
+
+.rotated {
+    transform: rotate(0deg);
 }
 
 #events {

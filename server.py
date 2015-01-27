@@ -20,7 +20,12 @@ class Main:
         send_event = True
         
         print(event)
-        if event.get('player'):
+        
+        if event.get('game'):
+            e = event.get('game')
+            self.game.update(e)
+        
+        elif event.get('player'):
             e = event.get('player')
             player = self.players[e['id']]
             player.update(e)
@@ -78,8 +83,9 @@ def handle_client(websocket, path):
         if not message: break
         else: main.new_event(fromjson(message))
 
-    if player: print(player.name, 'disconnected')        
-    main.new_event({'player': {'id': player.id, 'connected': False}})
+    if player:
+        print(player.name, 'disconnected')        
+        main.new_event({'player': {'id': player.id, 'connected': False}})
     
 start_server = websockets.serve(handle_client, '0.0.0.0', 8765)
 

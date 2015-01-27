@@ -5,43 +5,80 @@ var player_cols = [
     'id'
 ]
 
+var players = {};
+
+var gamestate = null;
+
+function Player(id) {
+    var me = this; // I wish javascript was Python... stupid namespaces.
+
+    this.row = $('<tr>', {id: id}).appendTo($('#playerlistbody'));    
+
+    toggletd = $('<td>').appendTo(this.row);
+    this.toggle = $('<a>').appendTo(toggletd);
+    this.toggleimg = $('<img>', {src: 'img/triangle.svg', class: 'imgbutton'}).appendTo(this.toggle);
+    
+    this.name = $('<td>').appendTo(this.row);
+    this.team = $('<td>').appendTo(this.row);
+    this.connected = $('<td>').appendTo(this.row);
+    this.power = $('<td>').appendTo(this.row);
+    this.id = $('<td>').appendTo(this.row);
+        
+    this.settingsrow = $('<tr>').appendTo($('#playerlistbody'));
+    this.toggle.click(function(e) {
+        if (!me.settingsdiv.hasClass('collapsed')) {
+            me.settingsdiv.addClass('collapsed');
+            me.toggleimg.removeClass('rotated');
+        }
+        
+        else {
+            $('.playersettings').addClass('collapsed');
+            $('.imgbutton').removeClass('rotated');
+            me.settingsdiv.removeClass('collapsed');
+            me.toggleimg.addClass('rotated');
+        }
+    });
+    
+    this.settingstd = $('<td>', {colspan: 5}).appendTo(this.settingsrow);
+    this.settingsdiv = $('<div>', {class: 'playersettings collapsed'}).appendTo(this.settingstd);
+    $('<h1>', {text: 'BLAH!'}).appendTo(this.settingsdiv);     
+
+    this.togglesettings = function (event) {alert(event); this.settingsrow.slideToggle();}
+    
+    this.update = function (playerdata) {
+        if (playerdata.connected !== undefined) {
+            if (playerdata.connected) {playerdata.connected = 'Connected';}
+            else {playerdata.connected = 'Disconnected';}
+        }
+        for (prop in playerdata) {
+            if (this[prop] !== undefined) {
+                this[prop].text(playerdata[prop]);
+            }
+        }
+    }
+}
+
 function handlemessage(event) {
     data = JSON.parse(event.data);
     
     if (data.game !== undefined) {
         if (data.game.state !== undefined) {
-            document.getElementById('gamestate').innerHTML = data.game.state;
+            gamestate = data.game.state;
+            $('#gamestate').text(data.game.state);
         }
         if (data.game.mode !== undefined) {
-            document.getElementById('gamemode').innerHTML = data.game.mode;
+            $('#gamemode').text(data.game.mode);
         }
     }
     
     else if (data.player !== undefined) {
-        // remember - ordering player list: document.getElementById('body').insertBefore(ele1, ele2);
-        var row = document.getElementById(data.player.id);
-        if (row === null) {
-            row = document.createElement('tr');
-            row.setAttribute('id', data.player.id);
-            
-            for (col in player_cols) {
-                td = document.createElement('td');
-                row.appendChild(td);
-            }
-            
-            document.getElementById('playerlistbody').appendChild(row);
+        var player = players[data.player.id];
+        if (player === undefined) {
+            player = new Player();
+            players[data.player.id] = player;
         }
-        
-        for (col in player_cols) {
-            if (data.player[player_cols[col]] !== undefined) {
-                if (player_cols[col] == 'connected') {
-                     if (data.player.connected) {data.player.connected = 'Connected';}
-                     else {data.player.connected = 'Disconnected';}
-                }
-                
-                row.getElementsByTagName('td')[col].innerHTML = data.player[player_cols[col]];
-            }
-        }
+
+        player.update(data.player);
     }
 }
 
@@ -52,15 +89,24 @@ function sendevent(event) {
 var gamesettings_state = false
 function togglesettings() {
     if (!gamesettings_state) {
-        document.getElementById('gamesettings').classList.add('expand');            
+        $('#gamesettings').addClass('expand');
         gamesettings_state = true;
     }
     
     else {
-        document.getElementById('gamesettings').classList.remove('expand');
+        $('#gamesettings').removeClass('expand');
         gamesettings_state = false;
     }
 }
+
+function startstopclicked() {
+    if (gamestate == 'not playing') {
+        sendevent({'game': {
+            'state': 'starting'
+        }});
+    }
+}
+
 
 if (window.location.hostname == '') {
     // Page is loaded locally for development, not hosted on a server.
@@ -73,6 +119,7 @@ else {
 websocket.onmessage = handlemessage;
 websocket.onopen = function (event) {
     websocket.send('{"type": "web"}');
+    $('#main').addClass('connected');
 }
 
 //TODO write connection error handle code

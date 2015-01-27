@@ -4,35 +4,62 @@
         <title>LazyTag</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="lazytag.css">
+        <script src="jquery-2.1.3.min.js"></script>
         <script src="lazytag.js"></script>
     </head>
     <body>
-        <div id="game">
-            <p id="gamestate">Loading...</p>
+        <div id="main">
+            <div id="game">
+                <p id="gamestate"></p>
 
-            <p id="gamemode"></p>
+                <p id="gamemode"></p>
 
-            <a onclick="togglesettings()" href="#">Game Settings</a>
+                <button onclick="togglesettings()">Game Settings</button>
 
-            <div id="gamesettings">
+                <div id="gamesettings">
+                    <ul>
+                        <li>
+                            <label for="gamemode">Game Mode:</label>
+                            <select id="gamemode">
+                                <option value="battle">Battle</option>
+                            </select>
+                        </li>
+
+                        <li>
+                            <label for="teams">Teams:</label>
+                            <select id="teams">
+                                <option value="0">FFA</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </li>
+
+                        </li>
+                            <button id="gamestartstop" onclick="startstopclicked()">Start Game</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+                    
+            <div id="players">
+                <table id="playerlist">
+                    <caption>Players</caption>
+                    <tbody id="playerlistbody">
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Team</th>
+                            <th>Status</th>
+                            <th>Power</th>
+                            <th>ID</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="events">
             </div>
         </div>
-                
-        <div id="players">
-            <table id="playerlist">
-                <caption>Players</caption>
-                <tbody id="playerlistbody">
-                    <tr>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Power</th>
-                        <th>ID</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div id="events">
-        </div>        
     </body>
 </html>
