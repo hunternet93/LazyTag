@@ -84,7 +84,7 @@ button,select {
     transform: rotate(-90deg);
 }
 
-.rotated {
+.imgbutton .rotated {
     transform: rotate(0deg);
 }
 

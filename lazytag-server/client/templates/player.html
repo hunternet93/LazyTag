@@ -1,0 +1,27 @@
+<template name="player">
+    <tr>
+        <td><img class="imgbutton rotated" src="/triangle.svg"></td>
+        <td class="centered">{{name}}</td>
+        <td>{{power}}</td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <div class="player-settings collapsed">
+                <p>Tagger ID: {{tagger_id}}</p>
+                <form class="pure-form">
+                    {{#if showteamsel}}                    
+                        <label for="{{tagger_id}}-team">Team:</label>
+                        <select id="{{tagger_id}}-team" class="team-select">
+                            {{#each teamnums team}}
+                                <option value="{{team}}" {{selected}}>{{team}}</option>
+                            {{/each}}
+                        </select>
+                    {{/if}}
+                    <label for="{{tagger_id}}-name">Name:</label>
+                    <input type="text" class="name-input" id="{{tagger_id}}-name" placeholder="{{name}}">
+                    <button class="pure-button delete-button" id="{{tagger_id}}-delete">Delete</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+</template>

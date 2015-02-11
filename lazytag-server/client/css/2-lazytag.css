@@ -1,0 +1,106 @@
+body {
+    background-color: #101010;
+    color: white;
+    font-family: "Verdana", sans-serif;
+    font-size: 1.2em;
+}
+
+#game {
+    width: auto;
+}
+
+
+.team-0 .teamcolor {
+    color: white;
+}
+
+.team-0 table {
+    border: 1px solid white;
+}
+
+
+.team-1 .teamcolor {
+    color: blue;
+}
+
+.team-1 table {
+    border: 1px solid blue;
+}
+
+
+.team-2 .teamcolor {
+    color: red;
+}
+
+.team-2 table {
+    border: 1px solid red;
+}
+
+
+.team-3 .teamcolor {
+    color: green;
+}
+
+.team-3 table {
+    border: 1px solid green;
+}
+
+
+.team-4 .teamcolor{
+    color: yellow;
+}
+
+.team-4 table {
+    border: 1px solid yellow;
+}
+
+
+.playerlist {
+    width: 100%;
+    min-width: 10em;
+    min-height: 20vh;
+}
+
+.playerlist caption,th {
+    text-align: left;
+}
+
+.player-settings {
+    opacity: 1;
+    background: black;
+    font-size: 75%;
+    transition: 1s;
+}
+
+.collapsed {
+    height: 0px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.centered {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imgbutton {
+    height: .75em;
+    transition: transform .5s;
+}
+
+.delete-button {
+    background: red;
+}
+
+.rotated {
+    transform: rotate(-90deg);
+}
+
+#events {
+    height: 20vh;
+    font-size: 75%;
+    line-height: 0.2;
+    overflow-y: scroll;
+    outline: 1px solid gray;
+}

@@ -1,0 +1,19 @@
+<template name="playerList">
+    {{#each teams}}
+        <div class="{{teamclass}} pure-u-1 {{grid}}">
+            <table class="centered playerlist">
+                <caption class="teamcolor">{{teamname}}</caption>
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Power</th>
+                    </tr>
+                    {{#each players team}}
+                        {{>player}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{/each}}
+</template>

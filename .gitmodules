@@ -1,0 +1,6 @@
+[submodule "lazytag-server/client/purecss"]
+	path = lazytag-server/client/purecss
+	url = https://github.com/yahoo/pure.git
+[submodule "ddp_asyncio"]
+	path = ddp_asyncio
+	url = https://github.com/hunternet93/ddp_asyncio.git

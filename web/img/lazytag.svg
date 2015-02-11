@@ -61,9 +61,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6568543"
-     inkscape:cx="81.925077"
-     inkscape:cy="21.906103"
+     inkscape:zoom="2.8284272"
+     inkscape:cx="35.12375"
+     inkscape:cy="21.755424"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -102,21 +102,21 @@
        y="556.83691" />
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
        x="195.71706"
-       y="594.76306"
+       y="590.76306"
        id="text2987"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan2989"
          x="195.71706"
-         y="594.76306"
+         y="590.76306"
          style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Verdana;-inkscape-font-specification:Verdana Bold">LazyTag</tspan></text>
     <path
        style="fill:#ff0000;fill-opacity:1;stroke:none;filter:url(#filter3876)"
        d="m 200.64155,605.66284 170.46324,0 c 0.20986,0 0.37881,0.16895 0.37881,0.37881 0,0.20986 -0.16895,0.37881 -0.37881,0.37881 l -170.46324,0 c -0.20986,0 -0.37881,-0.16895 -0.37881,-0.37881 0,-0.20986 0.16895,-0.37881 0.37881,-0.37881 z"
        id="rect2991"
        inkscape:connector-curvature="0"
-       transform="matrix(1.040364,0,0,1.0544986,-10.213138,-33.028409)" />
+       transform="matrix(1.040364,0,0,4.8185882,-10.213138,-2316.1681)" />
   </g>
 </svg>
