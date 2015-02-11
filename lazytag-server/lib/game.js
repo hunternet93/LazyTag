@@ -5,7 +5,7 @@ game = {
 
 Meteor.methods({
     newGame: function () {
-        players.update({}. {$set: {power: 100, score: 0}}, {multi: true});
+        players.update({}, {$set: {power: 100, score: 0}}, {multi: true});
         events.remove({});
         events.insert({type: 'state', state: 'pregame', time: new Date()});
         game.state.set('pregame');
